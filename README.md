@@ -6,4 +6,4 @@ torchvision
 transformers
 nomkl
 numpy
-For a full list of packages, consult All_Packages.txt
+For a full list of packages, consult All-Packages.txt
