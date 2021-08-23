@@ -59,14 +59,6 @@ labelled_data = {}
 
 def findFiles(path): return glob.glob(path)
 
-#print(findFiles('Kairos_Project_Training_Data/Chaos/*.txt'))
-
-#print(findFiles('Kairos_Project_Training_Data/Nonsense/*.txt'))
-
-#print(findFiles('Kairos_Project_Training_Data/Gibberish/*.txt'))
-
-#print(findFiles('Kairos_Project_Training_Data/English/*.txt'))
-
 def readText(folder: str, category: str, read_dict: dict):
     
     read_list: List[str] = []
@@ -91,9 +83,7 @@ readText('Kairos_Project_Evaluation_Data/Nonsense/*.txt', 'Nonsense', labelled_e
 readText('Kairos_Project_Evaluation_Data/Gibberish/*.txt', 'Gibberish', labelled_evaluation_data)
 readText('Kairos_Project_Evaluation_Data/English/*.txt', 'English', labelled_evaluation_data)
 
-#%% 3. Classism is pretty based
-
-
+#%% 3. Classism
 
 class RNN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -117,8 +107,7 @@ class RNN(nn.Module):
 
 #%% 4. ALl the Functions, also some constant variables and such.
 
-
-#Don't change this stuff. It'll get you, homie
+#Don't change this stuff. It'll make everything very messy
 N_HIDDEN = 200
 N_CATEGORIES = 4
 INPUT_SIZE = 30522
@@ -242,7 +231,7 @@ hidden = torch.zeros(1, N_HIDDEN)
 rnn.load_state_dict(torch.load('Kairos_RNN_Weights.pth'))
 
 
-#%% 6. PUSH IT TO THE LIMIT! Training area. Run your training here. Get /fit/
+#%% 6. PUSH IT TO THE LIMIT! Training area. Run your training here. Get fit
 
 #output, next_hidden = rnn(input[0], hidden)
 #print (output)
