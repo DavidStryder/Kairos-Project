@@ -3,9 +3,10 @@
 Created on Sun May 23 13:00:25 2021
 
 @author: David SoucieGarza
+IDE: SpyderV3
 """
 
-#%% 1. All imported packages. I love globalism
+#%% 1. All imported packages. Complete list of packages in the anaconda environment available in Kairos-Project/All Packages
 
 from typing import List, Tuple
 import scipy
@@ -31,7 +32,7 @@ import torch.nn.functional as Func
 
 from transformers import BertModel, BertTokenizer, BertConfig
 
-#%% 2. Berta ba bert.
+#%% 2. Instantiation of BERT Tokenizer
 
 #Bert model. Source: https://huggingface.co/transformers/model_doc/bert.html
 model_name = 'bert-base-uncased'
@@ -41,7 +42,7 @@ config = BertConfig.from_pretrained(model_name)
 
 
 
-#%% 2.5 Also the training data
+#%% 2.5 Training Data, including html links to their source
 
 
 #Training and evaluation data, taken from text files
@@ -83,7 +84,7 @@ readText('Kairos_Project_Evaluation_Data/Nonsense/*.txt', 'Nonsense', labelled_e
 readText('Kairos_Project_Evaluation_Data/Gibberish/*.txt', 'Gibberish', labelled_evaluation_data)
 readText('Kairos_Project_Evaluation_Data/English/*.txt', 'English', labelled_evaluation_data)
 
-#%% 3. Classism
+#%% 3. All instantiated classes
 
 class RNN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -105,18 +106,18 @@ class RNN(nn.Module):
     def initHidden(self):
         return torch.zeros(1, self.hidden_size)
 
-#%% 4. ALl the Functions, also some constant variables and such.
+#%% 4. All functions and constant variables
 
 #Don't change this stuff. It'll make everything very messy
 N_HIDDEN = 200
 N_CATEGORIES = 4
 INPUT_SIZE = 30522
 all_categories: List[str] = ["Chaos", "Nonsense", "Gibberish", "English"]
-LEARNING_RATE = 0.005 #Too high, explooooosion. Too low, doesn't accomplish anything. Change at your own risk
+LEARNING_RATE = 0.005 #Too high, explooooosion of backpropagation. Too low, doesn't backpropagate enough. Change at your own risk
 criterion = nn.NLLLoss()
 
 
-#It... gets a token. Inputs a string of text and converts it into a list of tokens, then a Torch Tensor, via the Bert tokenizer
+#Gets a token. Inputs a string of text and converts it into a list of tokens, then a Torch Tensor, via the Bert tokenizer
 def get_tokens_tensor(text: str, tokenizer: BertTokenizer, 
                config: BertConfig) -> List[int]:
     
@@ -134,7 +135,7 @@ def get_tokens_tensor(text: str, tokenizer: BertTokenizer,
     
     return token_ids_tensor
 
-#A full batch, results in a list of tensors.
+#A full batch of tokens, results in a list of tensors.
 def enter_tokens(strings: List[str], length: int) -> List[List[int]]:
     
     token_ids_tensor_list: List[str] = []
@@ -220,18 +221,18 @@ def predict(input_line, n_predictions = 4):
             
 
 
-#%% 5. Instance of neural net. Run this cell at your own risk, King
+#%% 5. Instance of neural net. Pretty big file, so run this cell at your own risk, King
 
 rnn = RNN(INPUT_SIZE, N_HIDDEN, N_CATEGORIES)
 hidden = torch.zeros(1, N_HIDDEN)
 
 
-#%% 5.5 Already ran it, and have some saved weights? Load it like this instead
+#%% 5.5 Already ran it, and have some saved weights? Load it like this instead!
 
 rnn.load_state_dict(torch.load('Kairos_RNN_Weights.pth'))
 
 
-#%% 6. PUSH IT TO THE LIMIT! Training area. Run your training here. Get fit
+#%% 6. PUSH IT TO THE LIMIT! Training area. Run your training here. 
 
 #output, next_hidden = rnn(input[0], hidden)
 #print (output)
@@ -276,7 +277,7 @@ for iter in range(1, n_iters + 1):
 
 
 
-#%% 7. Training is hard. Take a break here
+#%% 7. Training is hard. Take a break here and see the results.
 
 plt.figure()
 #plt.plot(all_losses)
@@ -316,6 +317,6 @@ plt.show()
 
 
 
-#%% 8. Always remember to save your work, king
+#%% 8. Always remember to save your work.
 
 torch.save (rnn.state_dict(), 'Kairos_RNN_Weights.pth')
