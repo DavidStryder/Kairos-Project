@@ -5,5 +5,5 @@ Model originally run in an Anaconda environemnt with the following non-default p
 torchvision,
 transformers,
 nomkl,
-numpy, 
+numpy. 
 For a full list of packages, consult All-Packages.txt
